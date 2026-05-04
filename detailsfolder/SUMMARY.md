@@ -20,17 +20,16 @@ This folder contains the visual evidence and a technical breakdown of the Jcurve
    - Fixed the Quality Score percentage bug.
    - Added manual expansion for completed tasks to show tool call history.
 
+- **Security Protocol Breach**: Created a custom data-driven error (`run_security_fail.json`) where the run is terminated by a safety filter during an unauthorized access attempt.
+
 ## 📊 What Data I Gave (Fixtures)
-The project is driven by two main JSON fixtures in `src/mock/fixtures/`:
-1. **`run_success.json`**: 
-   - **Query**: "Analyze Apple's R&D intensity vs large-cap peers 2019–2023"
-   - **Workflow**: 10-K data retrieval -> Parallel peer comparison (Google/Microsoft/Amazon) -> Report Synthesis.
-   - **Data Points**: Includes tool calls to SEC EDGAR, Bloomberg, and FactSet.
-2. **`run_error.json`**: 
-   - Simulates a partial run that fails during a Bloomberg API call, triggering a coordinator error banner.
+The project is driven by three JSON fixtures in `src/mock/fixtures/`:
+1. **`run_success.json`**: Full successful research pipeline.
+2. **`run_error.json`**: Coordinator timeout error.
+3. **`run_security_fail.json`**: Demonstrates a security-triggered system lock.
 
 ## 📸 Screenshots
-The following images (also saved in this folder) demonstrate the UI in action:
-- `initial_state.png`: The landing screen with the research query.
-- `running_pipeline.png`: The active pipeline showing parallel execution and streaming.
-- `final_result.png`: The synthesized report with citations and quality score.
+- `initial_state.png`: The landing screen.
+- `running_pipeline.png`: The active pipeline.
+- `final_result.png`: The synthesized report.
+- `security_fail_error.png`: The custom security failure alert.
