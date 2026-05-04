@@ -1,10 +1,12 @@
 import { useEffect, useState, useRef } from 'react';
 import run_success from './fixtures/run_success.json';
 import run_error from './fixtures/run_error.json';
+import run_security_fail from './fixtures/run_security_fail.json';
 
 const fixtures = {
   run_success,
-  run_error
+  run_error,
+  run_security_fail
 };
 
 /**

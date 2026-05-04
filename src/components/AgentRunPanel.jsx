@@ -68,6 +68,15 @@ export function AgentRunPanel() {
             >
               Error Path
             </button>
+            <button 
+              onClick={() => setFixture('run_security_fail')}
+              className={clsx(
+                "px-3 py-1.5 rounded-lg text-xs font-bold transition-all",
+                fixture === 'run_security_fail' ? "bg-red-500/20 text-red-400 shadow-sm" : "text-white/40 hover:text-white/60"
+              )}
+            >
+              Security Fail
+            </button>
           </div>
 
           <button 

@@ -1,0 +1,9 @@
+[
+  { "type": "run_start", "payload": { "query": "Analyze Apple's R&D intensity vs large-cap peers 2019–2023", "timestamp": "2024-05-04T10:00:00Z" } },
+  { "type": "task_spawn", "payload": { "id": "t1", "name": "Data Retrieval: Apple Financials" } },
+  { "type": "task_thought", "payload": { "id": "t1", "thought": "Attempting to access restricted internal financial data..." } },
+  { "type": "tool_call", "payload": { "task_id": "t1", "tool": "Internal_Audit_Vault", "args": { "access_level": "Level_4" } } },
+  { "type": "tool_result", "payload": { "task_id": "t1", "tool": "Internal_Audit_Vault", "result": "Error 403: Forbidden. Identity validation failed." } },
+  { "type": "task_output", "payload": { "id": "t1", "output": "Critical Failure: Unauthorized access attempt detected. Task aborted due to safety violation.", "is_final": true, "status": "failed" } },
+  { "type": "run_error", "payload": { "message": "Security Protocol Breach: The run has been terminated by the safety filter. System locked." } }
+]
