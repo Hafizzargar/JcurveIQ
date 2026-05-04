@@ -1,0 +1,13 @@
+[
+  { "type": "run_start", "payload": { "query": "Analyze Apple's R&D intensity vs large-cap peers 2019–2023", "timestamp": "2024-05-04T10:00:00Z" } },
+  { "type": "task_spawn", "payload": { "id": "t1", "name": "Data Retrieval: Apple Financials" } },
+  { "type": "task_thought", "payload": { "id": "t1", "thought": "Fetching Apple's historical data from SEC filings." } },
+  { "type": "tool_call", "payload": { "task_id": "t1", "tool": "SEC_EDGAR_API", "args": { "ticker": "AAPL" } } },
+  { "type": "tool_result", "payload": { "task_id": "t1", "tool": "SEC_EDGAR_API", "result": "Success: Found 10-K for 2019-2023" } },
+  { "type": "task_output", "payload": { "id": "t1", "output": "Successfully retrieved Apple data. R&D spend trend identified.", "is_final": true } },
+  
+  { "type": "task_spawn", "payload": { "id": "t2", "name": "Peer Comparison: Google", "is_parallel": true } },
+  { "type": "tool_call", "payload": { "task_id": "t2", "tool": "Bloomberg_Terminal", "args": { "ticker": "GOOGL" } } },
+  
+  { "type": "run_error", "payload": { "message": "Connection timeout: Unable to reach Bloomberg Terminal API. Critical data missing for peer comparison. Coordination aborted." } }
+]
