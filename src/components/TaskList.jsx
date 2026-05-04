@@ -36,7 +36,8 @@ export function TaskList({ tasks }) {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" style={{ border: '2px solid green' }}>
+      {/* 🟢 TaskList.jsx (The Pipeline Wrapper) */}
       {renderedGroups}
     </div>
   );

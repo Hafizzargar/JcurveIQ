@@ -33,7 +33,8 @@ export function AgentRunPanel() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-12">
+    <div className="max-w-5xl mx-auto px-4 py-12" style={{ border: '2px solid red' }}>
+      {/* 🔴 AgentRunPanel.jsx (The Main Container) */}
       
       {/* Navigation & Global Controls */}
       <div className="flex justify-between items-center mb-8">

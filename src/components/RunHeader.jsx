@@ -16,7 +16,8 @@ export function RunHeader({ query, status, startTime }) {
   }, [status, startTime]);
 
   return (
-    <div className="glass p-6 rounded-2xl mb-8 border-white/10 shadow-2xl">
+    <div className="glass p-6 rounded-2xl mb-8 border-white/10 shadow-2xl" style={{ border: '2px solid blue' }}>
+      {/* 🔵 RunHeader.jsx (Status & Timer) */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-start gap-4 flex-1">
           <div className="bg-blue-500/20 p-3 rounded-xl border border-blue-500/30">
