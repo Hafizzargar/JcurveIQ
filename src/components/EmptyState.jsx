@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, Sparkles } from 'lucide-react';
+import { Play, Sparkles, Pause } from 'lucide-react';
 
 export function EmptyState({ onStart }) {
   return (
@@ -17,13 +17,23 @@ export function EmptyState({ onStart }) {
         Witness real-time data retrieval, tool execution, and synthesis.
       </p>
 
-      <button 
-        onClick={onStart}
-        className="group relative flex items-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-500 rounded-2xl font-bold transition-all hover:scale-105 hover:shadow-[0_0_30px_-5px_rgba(37,99,235,0.5)] active:scale-95"
-      >
-        <Play size={20} className="fill-current" />
-        <span>Initialize Agent Run</span>
-      </button>
+      <div className="flex flex-col sm:flex-row items-center gap-4">
+        <button 
+          onClick={() => onStart(false)}
+          className="group relative flex items-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-500 rounded-2xl font-bold transition-all hover:scale-105 hover:shadow-[0_0_30px_-5px_rgba(37,99,235,0.5)] active:scale-95"
+        >
+          <Play size={20} className="fill-current" />
+          <span>Live Research Run</span>
+        </button>
+
+        <button 
+          onClick={() => onStart(true)}
+          className="group relative flex items-center gap-3 px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl font-bold transition-all hover:scale-105 active:scale-95 text-white/70 hover:text-white"
+        >
+          <Pause size={20} className="fill-current" />
+          <span>Step-by-Step (Paused)</span>
+        </button>
+      </div>
     </div>
   );
 }

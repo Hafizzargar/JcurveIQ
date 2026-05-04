@@ -29,7 +29,7 @@ export function TaskCard({ task }) {
       task.status === 'running' ? "ring-1 ring-blue-500/50" : "border-white/5",
       // Muted grayscale effect for skipped/cancelled tasks
       task.status === 'skipped' && "opacity-60 grayscale-[0.5]"
-    )} style={{ border: '2px solid orange' }}>
+    )} >
       {/* 🟠 TaskCard.jsx (Individual Research Step) */}
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">

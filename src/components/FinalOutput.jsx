@@ -3,7 +3,7 @@ import { Sparkles, Quote, Award } from 'lucide-react';
 
 export function FinalOutput({ content, citations, qualityScore }) {
   return (
-    <div className="mt-12 animate-in zoom-in-95 duration-700" style={{ border: '2px solid teal' }}>
+    <div className="mt-12 animate-in zoom-in-95 duration-700">
       {/* 🟢 FinalOutput.jsx (The Synthesized Result) */}
       <div className="relative glass-card rounded-2xl p-8 border-emerald-500/20 shadow-[0_0_50px_-12px_rgba(16,185,129,0.2)]">
         <div className="absolute -top-4 left-8 bg-emerald-500 flex items-center gap-2 px-4 py-1 rounded-full shadow-lg">

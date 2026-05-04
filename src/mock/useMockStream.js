@@ -15,50 +15,99 @@ const fixtures = {
  */
 export function useMockStream(onEvent, fixtureName = 'run_success') {
   const [isStreaming, setIsStreaming] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [isSlowMode, setIsSlowMode] = useState(false);
+  
   const timeoutRef = useRef(null);
+  const onEventRef = useRef(onEvent);
+  const currentIndexRef = useRef(0);
+  const isPausedRef = useRef(false);
+  const isSlowModeRef = useRef(false);
 
-  /**
-   * Starts the sequential emission of events.
-   * This is designed to mirror the interface of a production WebSocket handler.
-   */
-  const startStream = () => {
+  // Sync refs with state for use in the emitNext closure
+  useEffect(() => {
+    onEventRef.current = onEvent;
+  }, [onEvent]);
+
+  useEffect(() => {
+    isPausedRef.current = isPaused;
+  }, [isPaused]);
+
+  useEffect(() => {
+    isSlowModeRef.current = isSlowMode;
+  }, [isSlowMode]);
+
+  const startStream = (startPaused = false) => {
     if (isStreaming) return;
     setIsStreaming(true);
+    setIsPaused(startPaused);
+    isPausedRef.current = startPaused;
+    currentIndexRef.current = 0;
     
     const events = fixtures[fixtureName];
-    let currentIndex = 0;
 
     const emitNext = () => {
-      if (currentIndex < events.length) {
-        // Trigger the callback in the UI (processEvent)
-        onEvent(events[currentIndex]);
-        currentIndex++;
+      if (currentIndexRef.current < events.length) {
+        if (isPausedRef.current) {
+          // If paused, check back in 100ms
+          timeoutRef.current = setTimeout(emitNext, 100);
+          return;
+        }
+
+        // Trigger the callback in the UI
+        onEventRef.current(events[currentIndexRef.current]);
+        currentIndexRef.current++;
         
-        // Random delay between 400ms and 1200ms to simulate real-world API latency
-        const delay = Math.random() * 800 + 400; 
+        // Dynamic delay
+        let delay = Math.random() * 800 + 400; 
+        if (isSlowModeRef.current) {
+          delay = 10000; // 10 seconds for "slow mode" as requested
+        }
+        
         timeoutRef.current = setTimeout(emitNext, delay);
       } else {
         setIsStreaming(false);
+        setIsPaused(false);
       }
     };
 
     emitNext();
   };
 
-  /**
-   * Immediately halts the stream. Useful for resets or unmounting.
-   */
   const stopStream = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
     setIsStreaming(false);
+    setIsPaused(false);
+    currentIndexRef.current = 0;
   };
 
-  // Cleanup on unmount to prevent memory leaks or ghost timeouts
+  const togglePause = () => setIsPaused(prev => !prev);
+  const toggleSlowMode = () => setIsSlowMode(prev => !prev);
+
+  const stepNext = () => {
+    const events = fixtures[fixtureName];
+    if (currentIndexRef.current < events.length) {
+      onEventRef.current(events[currentIndexRef.current]);
+      currentIndexRef.current++;
+    } else {
+      setIsStreaming(false);
+    }
+  };
+
   useEffect(() => {
     return () => stopStream();
   }, []);
 
-  return { startStream, stopStream, isStreaming };
+  return { 
+    startStream, 
+    stopStream, 
+    togglePause, 
+    toggleSlowMode,
+    stepNext,
+    isStreaming, 
+    isPaused,
+    isSlowMode 
+  };
 }
