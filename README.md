@@ -69,7 +69,7 @@ The UI includes a toggle in the top-right to switch between:
 ---
 
 ## 🤖 AI Assistance Disclosure
-This project was developed with the assistance of **Antigravity (Google DeepMind)**, an agentic AI coding assistant. AI was utilized for:
+This project was developed with the assistance of **Antigravity (Google DeepMind)**, **ChatGPT**, and **Claude**. AI was utilized for:
 - Drafting the core event-driven state architecture.
 - Designing high-fidelity Tailwind CSS styles and glassmorphism utilities.
 - Generating comprehensive project documentation and technical diagrams.
